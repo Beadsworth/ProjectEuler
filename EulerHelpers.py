@@ -9,14 +9,11 @@ def is_prime(number):
     if number <= 1:
         raise TypeError('Number not above 1!  Cannot determine if prime.')
 
-    number_check = number
-    for potential_factor in range(2, number):
-        if potential_factor > number_check:
-            break
+    upper_limit = int(math.sqrt(number)) + 1  # need + 1 for 4, and just to be safe
+
+    for potential_factor in range(2, upper_limit):
         if number % potential_factor is 0:
             return False  # factor found, not prime, escape this
-        else:  # clip ending of search
-            number_check = number // potential_factor
 
     return True
 

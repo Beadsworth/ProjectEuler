@@ -1,4 +1,4 @@
-import unittest, math
+import unittest, math, time
 
 from EulerHelpers import is_prime, find_factors, find_prime_factors, find_primes, find_first_n_primes, \
     num_2_list, list_2_num, find_perms
@@ -44,6 +44,27 @@ class TestFunctions(unittest.TestCase):
 
         for number in err_list:
             self.assertRaises(TypeError, is_prime, number)
+
+        mag_prime_list = [
+            1000003,
+            10000019,
+            100000007,
+            1000000007,
+            10000000019,
+            100000000003,
+            1000000000039,
+            10000000000037,
+            100000000000031
+        ]
+
+        for num in mag_prime_list:
+            start = time.time()
+            is_prime(num)
+            stop = time.time()
+            diff = stop - start
+            print(str(num) + ' calculated in ', end='')
+            print('{:.2e}'.format(diff), end='')
+            print(' seconds.')
 
     def test_find_factors(self):
 
