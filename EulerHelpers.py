@@ -37,7 +37,7 @@ def find_factors(number):
 
     sq_rt = int(math.sqrt(number))
 
-    for potential_factor in range(2, sq_rt):
+    for potential_factor in range(2, sq_rt + 1):
         if number % potential_factor is 0:  # if it's a factor...
             comp_factor = number // potential_factor
             factor_list.append(potential_factor)
