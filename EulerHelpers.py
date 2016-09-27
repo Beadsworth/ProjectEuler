@@ -173,7 +173,6 @@ def find_nth_fib_term(n):
     return nth_term
 
 
-
 def find_primes(up_to_num):
     """Returns list of primes up to and including the argument"""
 
@@ -316,3 +315,44 @@ def find_perms(input_list):
     scramble(progress_list, temp_list, result_list)
 
     return result_list
+
+
+def collatz_gen(starting_num):
+    """Iterate through Collatz sequence.  First term will be the input parameter"""
+
+    if (type(starting_num) is not int) or (starting_num < 1):
+        raise TypeError('Must be positive integer above 1')
+
+    current_term = starting_num
+
+    yield current_term
+
+    while current_term > 1:
+
+        if current_term % 2 == 0:  # if even
+            current_term = current_term // 2
+            yield current_term
+
+        else:  # if odd
+            current_term = 3*current_term + 1
+            yield current_term
+
+
+def find_nth_triangle_num(n):
+
+    return (n * (n + 1))//2
+
+
+def find_n_triangle_nums(n):
+    """return list of triangle numbers, up to nth term"""
+
+    if (type(n) is not int) or (n < 1):
+        raise TypeError('Must be positive integer above 1')
+
+    tri_list = [1]
+
+    for i in range(2, n+1):
+
+        tri_list.append(find_nth_triangle_num(i))
+
+    return tri_list
