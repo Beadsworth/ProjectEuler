@@ -306,5 +306,6 @@ class TestFunctions(unittest.TestCase):
         for index, number in enumerate(fib_seq):
             self.assertEqual(number, find_nth_fib_term(index))
 
+
 if __name__ == '__main__':
     unittest.main()
