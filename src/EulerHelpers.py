@@ -95,6 +95,51 @@ def get_prime_factorization_pool(n):
     return factors
 
 
+def sequence_product(sequence):
+
+    product = 1
+    for n in sequence:
+        product = product * n
+
+    return product
+
+
+def get_all_factorization_pool(n):
+
+    prime_factor_pool = get_prime_factorization_pool(n)
+    found_factors = []
+
+    for partition in set_partition(prime_factor_pool):
+        factors = sorted([sequence_product(sequence) for sequence in partition])
+
+        # trivial case, need 1 * n added
+        if len(factors) == 1:
+            factors = factors + [1]
+
+        if factors not in found_factors:
+            found_factors.append(factors)
+            yield factors
+
+
+def get_all_factorization(n):
+
+    all_factor_pool = get_all_factorization_pool(n)
+    factorization_combos = []
+
+    for factorization in all_factor_pool:
+        factor_dict = {}
+        for factor in factorization:
+            # update factor dictionary
+            if factor not in factor_dict:
+                factor_dict[factor] = 1
+            else:
+                factor_dict[factor] += 1
+
+        factorization_combos.append(factor_dict)
+
+    return factorization_combos
+
+
 def find_next_prime(start):
     """Finds and returns next prime from start.  If start is prime, start is returned"""
 
@@ -388,3 +433,65 @@ def find_n_triangle_nums(n):
         tri_list.append(find_nth_triangle_num(i))
 
     return tri_list
+
+
+def set_partition(collection):
+    """recursively find partitions of a set"""
+
+    if len(collection) == 1:
+        yield [collection]
+        return
+
+    first = collection[0]
+    for smaller in set_partition(collection[1:]):
+        # insert `first` in each of the subpartition's subsets
+        for n, subset in enumerate(smaller):
+            yield smaller[:n] + [[first] + subset] + smaller[n+1:]
+        # put `first` in its own subset
+        yield [[first]] + smaller
+
+
+def partition_into_m_parts(n, m):
+    """generate sequences of length m where sum = n"""
+
+    if not n >= m >= 2:
+        raise RuntimeError("must have n >= m >= 2")
+
+    # H1
+    # add initial zero so a can follow math convention
+    a = [0] + [n - m + 1] + [1 for i in range(m - 1)] + [-1]
+
+    while True:
+        # H2
+        yield a[1:-1]
+
+        while a[2] < a[1] - 1:
+            # H3
+            a[1] -= 1
+            a[2] += 1
+            yield a[1:-1]
+
+        # H4
+        j = 3
+        s = a[1] + a[2] - 1
+
+        while a[j] >= a[1] - 1:
+            s = s + a[j]
+            j += 1
+
+        # H5
+        if j > m:
+            # you are done
+            return
+
+        x = a[j] + 1
+        a[j] = x
+        j = j - 1
+
+        # H6
+        while j > 1:
+            a[j] = x
+            s = s - x
+            j = j - 1
+
+        a[1] = s
