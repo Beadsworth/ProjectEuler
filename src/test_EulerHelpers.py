@@ -95,7 +95,7 @@ class TestFunctions(unittest.TestCase):
             find_factors(num)
             stop = time.time()
             diff = stop - start
-            print(str(num) + ' find_factos() calculated in ', end='')
+            print(str(num) + ' find_factors() calculated in ', end='')
             print('{:.2e}'.format(diff), end='')
             print(' seconds.')
 

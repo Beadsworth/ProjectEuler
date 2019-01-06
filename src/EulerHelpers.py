@@ -3,22 +3,24 @@ import math
 
 def is_prime(number):
 
-    if (number % 1) is not 0:
+    try:
+        integer = int(number)
+    except (TypeError, ValueError) as e:
         raise TypeError('Number not integer!  Cannot determine if prime.')
 
-    if number <= 1:
+    if integer <= 1:
         raise TypeError('Number not above 1!  Cannot determine if prime.')
 
-    if number is 2:
+    if integer is 2:
         return True
 
-    if number % 2 is 0:  # if even
+    if integer % 2 is 0:  # if even
         return False
 
-    upper_limit = int(math.sqrt(number)) + 1  # need + 1 for 4, and just to be safe
+    upper_limit = int(math.sqrt(integer)) + 1  # need + 1 for 4, and just to be safe
 
     for potential_factor in range(3, upper_limit, 2):
-        if number % potential_factor is 0:
+        if integer % potential_factor == 0:
             return False  # factor found, not prime, escape this
 
     return True
@@ -61,6 +63,36 @@ def find_prime_factors(number):
             prime_factor_list.append(factor)
 
     return prime_factor_list
+
+
+def get_prime_factorization(n):
+
+    prime_factors = find_prime_factors(n)
+
+    result = {}
+
+    for prime in prime_factors:
+
+        quotient = n
+        count = 0
+        while quotient % prime == 0:
+            count += 1
+            quotient = quotient // prime
+
+        result[prime] = count
+
+    return result
+
+
+def get_prime_factorization_pool(n):
+
+    prime_factorization = get_prime_factorization(n)
+
+    factors = []
+    for prime_factor, count in prime_factorization.items():
+        factors = factors + [prime_factor for i in range(count)]
+
+    return factors
 
 
 def find_next_prime(start):

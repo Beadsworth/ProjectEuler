@@ -1,4 +1,5 @@
-import src.EulerHelpers as euler
+import src.EulerHelpers as Euler
+import math
 
 
 if __name__ == '__main__':
