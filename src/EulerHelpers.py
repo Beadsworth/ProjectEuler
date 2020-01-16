@@ -1,4 +1,17 @@
 import math
+import os
+
+
+def get_path(relative_path):
+    """get absolute_path relative to top-level "crypto" folder"""
+    dirname = os.path.dirname(__file__)
+
+    higher_path = dirname
+    for i in range(1):
+        higher_path = os.path.split(higher_path)[0]
+
+    file_path = os.path.join(higher_path, relative_path)
+    return file_path
 
 
 def is_prime(number):
