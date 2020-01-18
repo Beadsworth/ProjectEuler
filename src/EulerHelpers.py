@@ -508,3 +508,13 @@ def partition_into_m_parts(n, m):
             j = j - 1
 
         a[1] = s
+
+
+def is_palindrome(number):
+    num_list = num_2_list(number)
+    num_digits = len(num_list)
+    for i in range(num_digits // 2):
+        if num_list[i] != num_list[num_digits - 1 - i]:
+            return False
+
+    return True
