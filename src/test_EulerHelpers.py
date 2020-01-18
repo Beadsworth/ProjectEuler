@@ -141,16 +141,16 @@ class TestFunctions(unittest.TestCase):
         bad_list = [0.1, 99.6, 2/3, 'hello']
 
         for bad in bad_list:
-            self.assertRaises(TypeError, num_2_list, bad)
+            self.assertRaises(AssertionError, num_2_list, bad)
 
     def test_list_2_num(self):
 
         for i in range(1000):
             self.assertEqual(i, list_2_num(num_2_list(i)))
 
-        self.assertRaises(TypeError, list_2_num, [])
-        self.assertRaises(TypeError, list_2_num, [0.2, 0.6, 1.3])
-        self.assertRaises(TypeError, list_2_num, ['h', 'e', 'llo'])
+        self.assertRaises(AssertionError, list_2_num, [])
+        self.assertRaises(AssertionError, list_2_num, [0.2, 0.6, 1.3])
+        self.assertRaises(AssertionError, list_2_num, ['h', 'e', 'llo'])
 
         list1 = [1, 2, 3, 4, 5]
         list2 = list(list1)

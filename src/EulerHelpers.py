@@ -320,57 +320,23 @@ def find_n_to_m_primes(n, m):
 def num_2_list(number):
     """Return list of digits, based off input number, negative numbers returned as positive list"""
 
-    if type(number) is not int:
-        raise TypeError('Must be integer!')
-
-    if number is 0:
-        return [0, ]
+    assert type(number) is int, 'Must be integer!'
 
     if number < 0:
         number *= -1
 
-    max_order = 1
-    num_check = 0
-
-    while num_check != number:
-        max_order *= 10
-        num_check = number % max_order
-
-    num_list = []
-    current_number = 1
-    previous_order = 1
-    current_order = 10
-
-    while previous_order < max_order:
-
-        current_number = ((number % current_order) - (number % previous_order)) // previous_order
-        num_list.append(current_number)
-        previous_order = current_order
-        current_order *= 10
-
-    result_list = list(reversed(num_list))
-    return result_list
+    return [int(c) for c in str(number)]
 
 
 def list_2_num(num_list):
     """Complement to num_2_list()"""
 
-    new_num_list = list(num_list)
+    for item in num_list:
+        assert type(item) is int, 'List of ints only!'
 
-    for item in new_num_list:
-        if type(item) is not int:
-            raise TypeError('List of Ints only!')
+    assert len(num_list) > 0, 'List was empty!'
 
-    if len(new_num_list) is 0:
-        raise TypeError('List was empty!')
-
-    temp_list = new_num_list
-
-    digits = len(new_num_list)
-    for i in range(digits):
-        temp_list[digits - 1 - i] *= 10 ** i
-
-    return sum(temp_list)
+    return int(''.join(str(x) for x in num_list))
 
 
 def scramble(progress, pool, result):
