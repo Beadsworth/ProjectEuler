@@ -191,7 +191,35 @@ def find_prev_prime(start):
     return 2  # if you get to this point, you have reached two and cannot go lower
 
 
-def prime_gen(start, end=None):
+def prime_gen_2(start: int = 2, stop: int = None):
+    """prime number generator.  Finds next prime from start, then iterates until no more primes less than end"""
+
+    # validations
+    assert start >= 2, f'bad start value given: {start}'
+    assert stop is None or stop >= start, f'bad start value given: {stop}'
+
+    current_prime = find_next_prime(start)
+
+    if start == 2:
+        yield 2
+        current_prime = 3
+
+    yield current_prime
+
+    # from here on, start/current prime is 3 or greater
+    # skip every even number
+    while True:
+        current_prime = find_next_prime(current_prime + 2)
+
+        if stop is not None and current_prime > stop:
+            return
+        else:
+            yield current_prime
+
+
+
+
+def prime_gen(start: int, end: int = None):
     """prime number generator.  Finds next prime from start, then iterates until no more primes less than end"""
 
     if end is None:  # makes argument behavior similar to range()

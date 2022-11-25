@@ -1,7 +1,7 @@
 import unittest, math, time
 
 from EulerHelpers import is_prime, find_factors, find_prime_factors, find_primes, find_first_n_primes, \
-    num_2_list, list_2_num, find_perms, prime_gen, fib_gen, find_nth_fib_term
+    num_2_list, list_2_num, find_perms, prime_gen, fib_gen, find_nth_fib_term, prime_gen_2
 
 
 class TestFunctions(unittest.TestCase):
@@ -193,6 +193,22 @@ class TestFunctions(unittest.TestCase):
         self.assertTrue(a_len == 0)
         self.assertTrue(b_len == 0)
         self.assertTrue(c_len == 1)
+
+    def test_prime_gen_2(self):
+
+        prime_max = max(self.master_prime_list)
+        gen_primes = prime_gen_2(stop=prime_max)
+
+        for prime in self.master_prime_list:
+            self.assertEqual(prime, next(gen_primes))
+
+        a = prime_gen_2(start=2, stop=5)
+        b = prime_gen_2(start=3, stop=5)
+        c = prime_gen_2(start=4, stop=10)
+
+        self.assertTrue(list(a) == [2, 3, 5])
+        self.assertTrue(list(b) == [3, 5])
+        self.assertTrue(list(c) == [5, 7])
 
     def test_fib(self):
 
