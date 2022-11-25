@@ -72,11 +72,11 @@ class TestFunctions(unittest.TestCase):
             factor_list = find_factors(number)
 
             for factor in factor_list:
-                self.assertTrue((number % factor) is 0)
+                self.assertTrue((number % factor) == 0)
 
         for prime in self.master_prime_list:
             result = find_factors(prime)
-            self.assertTrue(len(result) is 2)
+            self.assertTrue(len(result) == 2)
 
         large_num_list = [
             1000000,

@@ -24,10 +24,10 @@ def is_prime(number):
     if integer <= 1:
         raise TypeError('Number not above 1!  Cannot determine if prime.')
 
-    if integer is 2:
+    if integer == 2:
         return True
 
-    if integer % 2 is 0:  # if even
+    if integer % 2 == 0:  # if even
         return False
 
     upper_limit = int(math.sqrt(integer)) + 1  # need + 1 for 4, and just to be safe
@@ -41,11 +41,11 @@ def is_prime(number):
 
 def find_factors(number):
 
-    if number is 0:
+    if number == 0:
         raise TypeError('Cannot factor zero!')
-    if number % 1 is not 0 or number < 1:
+    if number % 1 != 0 or number < 1:
         raise TypeError('Positive ints only!')
-    if number is 1:
+    if number == 1:
         return [1]
 
     factor_list = [1, ]
@@ -53,7 +53,7 @@ def find_factors(number):
     sq_rt = int(math.sqrt(number))
 
     for potential_factor in range(2, sq_rt + 1):
-        if number % potential_factor is 0:  # if it's a factor...
+        if number % potential_factor == 0:  # if it's a factor...
             comp_factor = number // potential_factor
             factor_list.append(potential_factor)
             if comp_factor not in factor_list:
@@ -70,7 +70,7 @@ def find_prime_factors(number):
     factor_list = find_factors(number)
 
     for factor in factor_list:
-        if factor is 1:
+        if factor == 1:
             continue
         if is_prime(factor):
             prime_factor_list.append(factor)
@@ -161,7 +161,7 @@ def find_next_prime(start):
 
     potential_prime = int(start)
 
-    if potential_prime % 2 is 0:  # if even, add one (even cannot be prime anyway)
+    if potential_prime % 2 == 0:  # if even, add one (even cannot be prime anyway)
         potential_prime += 1
 
     while True:
@@ -179,7 +179,7 @@ def find_prev_prime(start):
 
     potential_prime = int(start)
 
-    if potential_prime % 2 is 0:  # if even, subtract one (even cannot be prime anyway)
+    if potential_prime % 2 == 0:  # if even, subtract one (even cannot be prime anyway)
         potential_prime -= 1
 
     while potential_prime > 1:
@@ -214,6 +214,7 @@ def prime_gen(start, end=None):
     if current_prime <= 3:
         current_prime = 3
 
+    # TODO: is this redundant?
     if current_prime > end:
         return
 
@@ -280,13 +281,13 @@ def find_primes(up_to_num):
 def find_first_n_primes(n):
     """Return list of the n smallest primes"""
 
-    if ((n % 1) is not 0) or (n < 0):
+    if ((n % 1) != 0) or (n < 0):
         raise TypeError('Must give natural number!')
 
-    if n is 0:
+    if n == 0:
         return []
 
-    if n is 1:
+    if n == 1:
         return [2, ]
 
     #  from this point on, n is at least 2
@@ -305,10 +306,10 @@ def find_first_n_primes(n):
 def find_n_to_m_primes(n, m):
     """Returns consecutive list of primes, from nth to mth prime"""
 
-    if ((m % 1) is not 0) or (m < n):
+    if ((m % 1) != 0) or (m < n):
         raise TypeError('Bad range given')
 
-    if n is 0:
+    if n == 0:
         n = 1
 
     prime_list = find_first_n_primes(m)
