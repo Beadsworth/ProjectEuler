@@ -2,12 +2,13 @@
 4-prime list = [3, 7, 109, 673]
 4-prime answer = 792
 
-build list of primes
-find next prime
-compare that prime to every prime already in the list
-when 4 pairs are found, you are done
-if prime doesn't match any, more on to next iteration
+build dictionary of primes
+{prime: list of concat pairs including self}
+when latest key has at least 3 matches, verify all matches have other matches in their own key
+might be possible that you get more than the required number of matches
 """
+
+
 from src.EulerHelpers import prime_gen_2, is_prime
 from typing import List
 
@@ -36,22 +37,15 @@ def concat_list_is_prime(prime_list: List[int]) -> bool:
         return True
 
 
-def check_prime_position(required_primes: int, prime_list: List[int], current_prime: int) -> List[int]:
+def check_prime_position(prime_list: List[int], current_prime: int) -> List[int]:
     """return list of primes if prime has required_primes matches before it"""
 
-    matches_needed = required_primes - 1
-    matches = 0
     paired_primes = []
     for prime in prime_list:
         if concats_are_prime(a=prime, b=current_prime):
             paired_primes.append(prime)
-            matches += 1
 
-            # short-circuit condition
-            if matches == matches_needed:
-                break
-
-    final_result = paired_primes + [current_prime, ]
+    final_result = paired_primes
     # call again with prime_list = final_result[:-1] and current_prime = final_result[-2]
     # then prime_list = final_result[:-2] and current_prime = final_result[-3]
     # etc
@@ -60,16 +54,39 @@ def check_prime_position(required_primes: int, prime_list: List[int], current_pr
 
 def find_pair_list(required_primes: int) -> List[int]:
 
+    prime_matches = {}
     prime_list = []
     # skip 2
-    for prime in prime_gen_2(start=2, stop=673):
+    for prime in prime_gen_2(start=3, stop=673):
+        # print progress
         print(f'\rprime: {prime: >6}', end='')
-        matching_primes = check_prime_position(required_primes=required_primes, prime_list=prime_list, current_prime=prime)
-        if len(matching_primes) >= required_primes:
-            return matching_primes
 
+        # for the current prime, find all possible matches
+        matching_primes = check_prime_position(prime_list=prime_list, current_prime=prime)
         prime_list.append(prime)
+        if matching_primes:
+            prime_matches[prime] = matching_primes
 
+
+            print(prime_matches)
+
+            # backwards iteration through list
+            # need at least required_primes number of matches
+            match_count = 1
+            reversed_prime_matches = list(reversed(matching_primes))
+            for i, prime_match in enumerate(reversed_prime_matches):
+                # key must exist and value must contain all lower numbers
+                if prime_match in prime_matches:
+                    smaller_list = list(reversed_prime_matches)[i+1:]
+                    smaller_count = [x for x in smaller_list if x in prime_matches]
+                    if smaller_count == len(list(reversed_prime_matches)):
+                        match_count += 1
+                        if match_count >= required_primes:
+                            return prime_list[-1]
+
+            # end condition
+            if len(matching_primes) >= required_primes+2:
+                return prime
 
 
 if __name__ == '__main__':
@@ -82,9 +99,11 @@ if __name__ == '__main__':
 
     # test = concat_list_is_prime(prime_list=test_primes)
     # answer = find_pair_list(required_primes=4)
-    my_prime_list = list(prime_gen_2(start=3, stop=96))
-    answer = check_prime_position(required_primes=4, prime_list=my_prime_list, current_prime=97)
+    # my_prime_list = list(prime_gen_2(start=3, stop=673))
+    answer = find_pair_list(4)
 
-    print(f'\ranswer: {answer}, sum:{sum(answer)}')
+    # print(check_prime_position(prime_list=my_prime_list, current_prime=673))
+
+    print(f'\ranswer: {answer}')
 
     print('done!')
