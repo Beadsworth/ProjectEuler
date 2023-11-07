@@ -1,0 +1,173 @@
+	Mon Nov  6 08:20 2023 Time and Allocation Profiling Report  (Final)
+
+	   p816 +RTS -p -RTS
+
+	total time  =      288.16 secs   (288160 ticks @ 1000 us, 1 processor)
+	total alloc = 1,304,325,190,944 bytes  (excludes profiling overheads)
+
+COST CENTRE                   MODULE SRC                     %time %alloc
+
+enumerate                     Main   p816.hs:40:1-25          34.4   61.8
+binSearchGtIndexHelper.l      Main   p816.hs:69:13-40         24.9   35.7
+binSearchGtIndexHelper.n      Main   p816.hs:67:13-37         13.5    0.0
+binSearchGtIndex              Main   p816.hs:(53,1)-(58,43)    6.1    0.0
+binSearchGtIndexHelper.last_l Main   p816.hs:71:13-33          5.6    0.0
+binSearchGtIndexHelper.r      Main   p816.hs:70:13-40          4.2    0.0
+qList.q                       Main   p816.hs:90:9-54           3.5    0.1
+dist2                         Main   p816.hs:(30,1)-(33,19)    1.4    0.8
+binSearchGtIndexHelper        Main   p816.hs:(62,1)-(72,41)    1.4    0.0
+closestPair.candidates        Main   p816.hs:124:13-66         1.1    0.6
+
+
+                                                                                                            individual      inherited
+COST CENTRE                               MODULE                SRC                      no.     entries  %time %alloc   %time %alloc
+
+MAIN                                      MAIN                  <built-in>               132           0    0.0    0.0   100.0  100.0
+ CAF                                      Main                  <entire-module>          263           0    0.0    0.0   100.0  100.0
+  answer                                  Main                  p816.hs:(133,1)-(135,26) 335           1    0.0    0.0   100.0  100.0
+   answer.list_Z                          Main                  p816.hs:135:9-26         336           1    0.0    0.0     0.1    0.1
+    d                                     Main                  p816.hs:(20,1)-(25,21)   339           1    0.0    0.0     0.1    0.1
+     d.n                                  Main                  p816.hs:22:9-17          340           1    0.0    0.0     0.0    0.0
+     d.s                                  Main                  p816.hs:23:9-23          341           1    0.0    0.0     0.0    0.0
+      sList                               Main                  p816.hs:(10,1)-(16,28)   342           1    0.0    0.0     0.0    0.0
+       sList.sL                           Main                  p816.hs:(13,9)-(16,28)   343     4000003    0.0    0.0     0.0    0.0
+        sList.sL.a                        Main                  p816.hs:16:17-28         344     4000002    0.0    0.0     0.0    0.0
+     d.sEven                              Main                  p816.hs:24:9-23          345           1    0.0    0.0     0.0    0.0
+      evens                               Main                  p816.hs:41:1-47          346           1    0.0    0.0     0.0    0.0
+       enumerate                          Main                  p816.hs:40:1-25          347           1    0.0    0.0     0.0    0.0
+     d.sOdd                               Main                  p816.hs:25:9-21          348           1    0.0    0.0     0.0    0.0
+      odds                                Main                  p816.hs:42:1-45          349           1    0.0    0.0     0.0    0.0
+       enumerate                          Main                  p816.hs:40:1-25          350           1    0.0    0.0     0.0    0.0
+   closestDist                            Main                  p816.hs:(77,1)-(80,41)   337           1    0.0    0.0    99.9   99.9
+    closestDist.answerDist2               Main                  p816.hs:80:9-41          352           1    0.0    0.0    98.2   99.6
+     closestPair                          Main                  p816.hs:(95,1)-(125,76)  353     1902849    0.1    0.0    98.2   99.6
+      closestPair.n                       Main                  p816.hs:101:13-29        354     1902849    0.1    0.0     0.1    0.0
+      dist2                               Main                  p816.hs:(30,1)-(33,19)   359     1145727    0.0    0.0     0.0    0.0
+       dist2.a                            Main                  p816.hs:32:9-19          360     1145727    0.0    0.0     0.0    0.0
+       dist2.b                            Main                  p816.hs:33:9-19          361     1145727    0.0    0.0     0.0    0.0
+      closestPair.(...)                   Main                  p816.hs:112:13-35        365      951424    0.0    0.0     0.0    0.0
+      closestPair.bl                      Main                  p816.hs:119:13-31        379      951424    0.1    0.0     0.1    0.0
+      closestPair.blIndex                 Main                  p816.hs:118:13-48        369      951424    0.0    0.0     0.3    0.2
+       binSearchGtIndex                   Main                  p816.hs:(53,1)-(58,43)   370      951424    0.0    0.0     0.3    0.2
+        binSearchGtIndexHelper            Main                  p816.hs:(62,1)-(72,41)   373     2626545    0.0    0.0     0.2    0.1
+         binSearchGtIndexHelper.n         Main                  p816.hs:67:13-37         374     2626545    0.0    0.0     0.0    0.0
+         binSearchGtIndexHelper.half      Main                  p816.hs:68:13-28         375     1675121    0.0    0.0     0.0    0.0
+         binSearchGtIndexHelper.l         Main                  p816.hs:69:13-40         376     1675121    0.1    0.1     0.1    0.1
+         binSearchGtIndexHelper.last_l    Main                  p816.hs:71:13-33         377     1675121    0.0    0.0     0.0    0.0
+         binSearchGtIndexHelper.i         Main                  p816.hs:72:13-41         378      951424    0.0    0.0     0.0    0.0
+         binSearchGtIndexHelper.r         Main                  p816.hs:70:13-40         405        3758    0.0    0.0     0.0    0.0
+        binSearchGtIndex.enumeratedList   Main                  p816.hs:58:13-43         371      951424    0.0    0.0     0.1    0.1
+         enumerate                        Main                  p816.hs:40:1-25          372      951424    0.1    0.1     0.1    0.1
+      closestPair.br                      Main                  p816.hs:120:13-52        389      951424    0.1    0.1     0.1    0.1
+      closestPair.brs                     Main                  p816.hs:121:13-34        390      951424    0.5    0.4     0.8    0.4
+       yCoord                             Main                  p816.hs:48:1-40          391    69781387    0.3    0.0     0.3    0.0
+      closestPair.candidates              Main                  p816.hs:124:13-66        380      951424    1.1    0.6    96.0   98.8
+       dist2                              Main                  p816.hs:(30,1)-(33,19)   401    65566410    1.4    0.8     1.4    0.8
+        dist2.a                           Main                  p816.hs:32:9-19          402    65566410    0.0    0.0     0.0    0.0
+        dist2.b                           Main                  p816.hs:33:9-19          403    65566410    0.0    0.0     0.0    0.0
+       qList                              Main                  p816.hs:(84,1)-(90,54)   381    11829415    0.2    0.0    93.5   97.4
+        qList.(...)                       Main                  p816.hs:86:9-24          382    11829415    0.0    0.0     0.0    0.0
+        qList.min_qy                      Main                  p816.hs:87:9-31          383    11829415    0.0    0.0     0.0    0.0
+        qList.min_qy_index                Main                  p816.hs:89:9-53          385    11829415    0.0    0.0    89.7   97.2
+         binSearchGtIndex                 Main                  p816.hs:(53,1)-(58,43)   386    11829415    6.1    0.0    89.7   97.2
+          binSearchGtIndexHelper          Main                  p816.hs:(62,1)-(72,41)   394    86566443    1.3    0.0    49.3   35.6
+           binSearchGtIndexHelper.n       Main                  p816.hs:67:13-37         395    86566443   13.4    0.0    13.4    0.0
+           binSearchGtIndexHelper.half    Main                  p816.hs:68:13-28         396    74740015    0.0    0.0     0.0    0.0
+           binSearchGtIndexHelper.l       Main                  p816.hs:69:13-40         397    74740015   24.8   35.6    24.8   35.6
+           binSearchGtIndexHelper.last_l  Main                  p816.hs:71:13-33         398    74740015    5.6    0.0     5.6    0.0
+           binSearchGtIndexHelper.r       Main                  p816.hs:70:13-40         404    24233936    4.1    0.0     4.1    0.0
+           binSearchGtIndexHelper.i       Main                  p816.hs:72:13-41         399    11826428    0.0    0.0     0.0    0.0
+          binSearchGtIndex.enumeratedList Main                  p816.hs:58:13-43         392    11826428    0.0    0.0    34.3   61.6
+           enumerate                      Main                  p816.hs:40:1-25          393    11826428   34.3   61.6    34.3   61.6
+        qList.py                          Main                  p816.hs:86:9-24          384    11829415    0.0    0.0     0.0    0.0
+        qList.q                           Main                  p816.hs:90:9-54          400    11829415    3.5    0.1     3.5    0.1
+        qList.qyList                      Main                  p816.hs:88:9-48          387      951424    0.1    0.0     0.1    0.0
+      closestPair.d                       Main                  p816.hs:109:13-32        357      951424    0.0    0.0     0.0    0.0
+      closestPair.dl                      Main                  p816.hs:107:13-30        358      951424    0.0    0.0     0.0    0.0
+      closestPair.dr                      Main                  p816.hs:108:13-30        363      951424    0.0    0.0     0.0    0.0
+      closestPair.dz                      Main                  p816.hs:125:13-76        364      951424    0.2    0.0     0.2    0.0
+      closestPair.half                    Main                  p816.hs:102:13-28        355      951424    0.0    0.0     0.0    0.0
+      closestPair.l                       Main                  p816.hs:103:13-32        356      951424    0.1    0.1     0.1    0.1
+      closestPair.lx                      Main                  p816.hs:117:13-34        366      951424    0.2    0.1     0.2    0.1
+      closestPair.r                       Main                  p816.hs:104:13-32        362      951424    0.1    0.0     0.1    0.0
+      closestPair.xLower                  Main                  p816.hs:113:13-45        367      951424    0.0    0.0     0.0    0.0
+      closestPair.xUpper                  Main                  p816.hs:114:13-45        388      951424    0.0    0.0     0.0    0.0
+      closestPair.x_mid                   Main                  p816.hs:112:13-35        368      951424    0.0    0.0     0.0    0.0
+    closestDist.list_X'                   Main                  p816.hs:79:9-38          338           1    0.9    0.2     1.7    0.2
+     xCoord                               Main                  p816.hs:47:1-40          351    40480735    0.8    0.0     0.8    0.0
+  main                                    Main                  p816.hs:(139,1)-(147,20) 264           1    0.0    0.0     0.0    0.0
+  test_case                               Main                  p816.hs:(128,1)-(130,20) 266           1    0.0    0.0     0.0    0.0
+   closestDist                            Main                  p816.hs:(77,1)-(80,41)   268           1    0.0    0.0     0.0    0.0
+    closestDist.answerDist2               Main                  p816.hs:80:9-41          283           1    0.0    0.0     0.0    0.0
+     closestPair                          Main                  p816.hs:(95,1)-(125,76)  284          13    0.0    0.0     0.0    0.0
+      closestPair.n                       Main                  p816.hs:101:13-29        285          13    0.0    0.0     0.0    0.0
+      dist2                               Main                  p816.hs:(30,1)-(33,19)   290           9    0.0    0.0     0.0    0.0
+       dist2.a                            Main                  p816.hs:32:9-19          291           9    0.0    0.0     0.0    0.0
+       dist2.b                            Main                  p816.hs:33:9-19          292           9    0.0    0.0     0.0    0.0
+      closestPair.(...)                   Main                  p816.hs:112:13-35        296           6    0.0    0.0     0.0    0.0
+      closestPair.bl                      Main                  p816.hs:119:13-31        310           6    0.0    0.0     0.0    0.0
+      closestPair.blIndex                 Main                  p816.hs:118:13-48        300           6    0.0    0.0     0.0    0.0
+       binSearchGtIndex                   Main                  p816.hs:(53,1)-(58,43)   301           6    0.0    0.0     0.0    0.0
+        binSearchGtIndexHelper            Main                  p816.hs:(62,1)-(72,41)   304          14    0.0    0.0     0.0    0.0
+         binSearchGtIndexHelper.n         Main                  p816.hs:67:13-37         305          14    0.0    0.0     0.0    0.0
+         binSearchGtIndexHelper.half      Main                  p816.hs:68:13-28         306           8    0.0    0.0     0.0    0.0
+         binSearchGtIndexHelper.l         Main                  p816.hs:69:13-40         307           8    0.0    0.0     0.0    0.0
+         binSearchGtIndexHelper.last_l    Main                  p816.hs:71:13-33         308           8    0.0    0.0     0.0    0.0
+         binSearchGtIndexHelper.i         Main                  p816.hs:72:13-41         309           6    0.0    0.0     0.0    0.0
+        binSearchGtIndex.enumeratedList   Main                  p816.hs:58:13-43         302           6    0.0    0.0     0.0    0.0
+         enumerate                        Main                  p816.hs:40:1-25          303           6    0.0    0.0     0.0    0.0
+      closestPair.br                      Main                  p816.hs:120:13-52        320           6    0.0    0.0     0.0    0.0
+      closestPair.brs                     Main                  p816.hs:121:13-34        321           6    0.0    0.0     0.0    0.0
+       yCoord                             Main                  p816.hs:48:1-40          322          32    0.0    0.0     0.0    0.0
+      closestPair.candidates              Main                  p816.hs:124:13-66        311           6    0.0    0.0     0.0    0.0
+       dist2                              Main                  p816.hs:(30,1)-(33,19)   332          82    0.0    0.0     0.0    0.0
+        dist2.a                           Main                  p816.hs:32:9-19          333          82    0.0    0.0     0.0    0.0
+        dist2.b                           Main                  p816.hs:33:9-19          334          82    0.0    0.0     0.0    0.0
+       qList                              Main                  p816.hs:(84,1)-(90,54)   312          20    0.0    0.0     0.0    0.0
+        qList.(...)                       Main                  p816.hs:86:9-24          313          20    0.0    0.0     0.0    0.0
+        qList.min_qy                      Main                  p816.hs:87:9-31          314          20    0.0    0.0     0.0    0.0
+        qList.min_qy_index                Main                  p816.hs:89:9-53          316          20    0.0    0.0     0.0    0.0
+         binSearchGtIndex                 Main                  p816.hs:(53,1)-(58,43)   317          20    0.0    0.0     0.0    0.0
+          binSearchGtIndexHelper          Main                  p816.hs:(62,1)-(72,41)   325          61    0.0    0.0     0.0    0.0
+           binSearchGtIndexHelper.n       Main                  p816.hs:67:13-37         326          61    0.0    0.0     0.0    0.0
+           binSearchGtIndexHelper.half    Main                  p816.hs:68:13-28         327          41    0.0    0.0     0.0    0.0
+           binSearchGtIndexHelper.l       Main                  p816.hs:69:13-40         328          41    0.0    0.0     0.0    0.0
+           binSearchGtIndexHelper.last_l  Main                  p816.hs:71:13-33         329          41    0.0    0.0     0.0    0.0
+           binSearchGtIndexHelper.i       Main                  p816.hs:72:13-41         330          20    0.0    0.0     0.0    0.0
+          binSearchGtIndex.enumeratedList Main                  p816.hs:58:13-43         323          20    0.0    0.0     0.0    0.0
+           enumerate                      Main                  p816.hs:40:1-25          324          20    0.0    0.0     0.0    0.0
+        qList.py                          Main                  p816.hs:86:9-24          315          20    0.0    0.0     0.0    0.0
+        qList.q                           Main                  p816.hs:90:9-54          331          20    0.0    0.0     0.0    0.0
+        qList.qyList                      Main                  p816.hs:88:9-48          318           6    0.0    0.0     0.0    0.0
+      closestPair.d                       Main                  p816.hs:109:13-32        288           6    0.0    0.0     0.0    0.0
+      closestPair.dl                      Main                  p816.hs:107:13-30        289           6    0.0    0.0     0.0    0.0
+      closestPair.dr                      Main                  p816.hs:108:13-30        294           6    0.0    0.0     0.0    0.0
+      closestPair.dz                      Main                  p816.hs:125:13-76        295           6    0.0    0.0     0.0    0.0
+      closestPair.half                    Main                  p816.hs:102:13-28        286           6    0.0    0.0     0.0    0.0
+      closestPair.l                       Main                  p816.hs:103:13-32        287           6    0.0    0.0     0.0    0.0
+      closestPair.lx                      Main                  p816.hs:117:13-34        297           6    0.0    0.0     0.0    0.0
+      closestPair.r                       Main                  p816.hs:104:13-32        293           6    0.0    0.0     0.0    0.0
+      closestPair.xLower                  Main                  p816.hs:113:13-45        298           6    0.0    0.0     0.0    0.0
+      closestPair.xUpper                  Main                  p816.hs:114:13-45        319           6    0.0    0.0     0.0    0.0
+      closestPair.x_mid                   Main                  p816.hs:112:13-35        299           6    0.0    0.0     0.0    0.0
+    closestDist.list_X'                   Main                  p816.hs:79:9-38          269           1    0.0    0.0     0.0    0.0
+     xCoord                               Main                  p816.hs:47:1-40          282          40    0.0    0.0     0.0    0.0
+   test_case.listZ                        Main                  p816.hs:130:9-20         267           1    0.0    0.0     0.0    0.0
+    d                                     Main                  p816.hs:(20,1)-(25,21)   270           1    0.0    0.0     0.0    0.0
+     d.n                                  Main                  p816.hs:22:9-17          271           1    0.0    0.0     0.0    0.0
+     d.s                                  Main                  p816.hs:23:9-23          272           1    0.0    0.0     0.0    0.0
+      sList                               Main                  p816.hs:(10,1)-(16,28)   273           1    0.0    0.0     0.0    0.0
+       sList.sL                           Main                  p816.hs:(13,9)-(16,28)   274          31    0.0    0.0     0.0    0.0
+        sList.sL.a                        Main                  p816.hs:16:17-28         275          30    0.0    0.0     0.0    0.0
+     d.sEven                              Main                  p816.hs:24:9-23          276           1    0.0    0.0     0.0    0.0
+      evens                               Main                  p816.hs:41:1-47          277           1    0.0    0.0     0.0    0.0
+       enumerate                          Main                  p816.hs:40:1-25          278           1    0.0    0.0     0.0    0.0
+     d.sOdd                               Main                  p816.hs:25:9-21          279           1    0.0    0.0     0.0    0.0
+      odds                                Main                  p816.hs:42:1-45          280           1    0.0    0.0     0.0    0.0
+       enumerate                          Main                  p816.hs:40:1-25          281           1    0.0    0.0     0.0    0.0
+ CAF                                      GHC.Conc.Signal       <entire-module>          258           0    0.0    0.0     0.0    0.0
+ CAF                                      GHC.Float             <entire-module>          252           0    0.0    0.0     0.0    0.0
+ CAF                                      GHC.IO.Encoding       <entire-module>          247           0    0.0    0.0     0.0    0.0
+ CAF                                      GHC.IO.Encoding.Iconv <entire-module>          245           0    0.0    0.0     0.0    0.0
+ CAF                                      GHC.IO.Handle.FD      <entire-module>          237           0    0.0    0.0     0.0    0.0
+ main                                     Main                  p816.hs:(139,1)-(147,20) 265           0    0.0    0.0     0.0    0.0

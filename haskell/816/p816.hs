@@ -1,45 +1,30 @@
 -- problem 816
+-- reduced execution from ~ 5 minutes to ~ 25 sec
 
 
 import Data.List
+import Data.Array
 
 
 -- point generator
 -- be careful about redundant calls to s!
-sList :: Int -> [Int]
-sList n = reverse (sL n)
-    where
-        sL :: Int -> [Int]
-        sL 0 = 290797 : []
-        sL n = (((head a)^2) `mod` 50515093) : a
-            where
-                a = sL (n-1)
 
+sList :: [Int]
+sList = iterate (\s -> s ^ 2 `mod` 50515093) 290797
+
+pList :: [(Int, Int)]
+pList = unfoldr (\(x:y:zs) -> Just ((x, y), zs)) sList
 
 d :: Int -> [(Int, Int)]
-d k = zip sEven sOdd
-    where
-        n = k + 1
-        s = sList (2*n)
-        sEven = evens s
-        sOdd = odds s
+d k = take k pList
 
 
 -- basic math & comp
-dist2 :: (Int, Int) -> (Int, Int) -> Int
-dist2 (x1, y1) (x2, y2) = (a^2 + b^2)
+distSquared :: (Int, Int) -> (Int, Int) -> Int
+distSquared (x1, y1) (x2, y2) = (a^2 + b^2)
     where 
         a = (x2-x1)
         b = (y2-y1)
-
-
-dist :: (Int, Int) -> (Int, Int) -> Double
-dist (x1, y1) (x2, y2) = sqrt (fromIntegral (dist2 (x1, y1) (x2, y2)))
-
-
-enumerate x = zip [0..] x
-evens xs = [x | (i, x) <- enumerate xs, even i]
-odds xs = [x | (i, x) <- enumerate xs, odd i]
 
 
 -- sort by coords
@@ -48,91 +33,98 @@ xCoord (x1, y1) (x2, y2) = compare x1 x2
 yCoord (x1, y1) (x2, y2) = compare y1 y2
 
 
--- find index of first occurance greater than value
-binSearchGtIndex :: Int -> [Int] -> Int
-binSearchGtIndex value [] = error "list is empty"
-binSearchGtIndex value list
-    | value > (last list) = length list
-    | otherwise  = binSearchGtIndexHelper value enumeratedList
-        where
-            enumeratedList = enumerate list
-
-
-binSearchGtIndexHelper :: Int -> [(Int, Int)] -> Int
-binSearchGtIndexHelper value enumeratedList
-    | n == 1 = i
-    | last_l < value = binSearchGtIndexHelper value r
-    | otherwise = binSearchGtIndexHelper value l
-        where
-            n = length enumeratedList
-            half = n `div` 2
-            l = take half enumeratedList
-            r = drop half enumeratedList
-            last_l = snd (last l)
-            i = fst (head enumeratedList)
-
-
--- wrapper
-closestDist :: [(Int, Int)] -> Double
-closestDist list_Z = sqrt (fromIntegral answerDist2)
+-- find list of 6 (max) points in candidate-zone
+-- where candidate-zone is within +/- 2 * delta of the given point
+-- use a binary search on the list of points sorted by y-value
+candidateList :: (Int, Int) -> Int -> [(Int, Int)] -> [(Int, Int)]
+candidateList point delta pointList = result
     where
-        list_X' = sortBy xCoord list_Z
-        answerDist2 = closestPair list_X'
+        -- need list sorted by y
+        sortedPointList = sortBy yCoord pointList
 
-
-qList :: (Int, Int) -> Int -> [(Int, Int)] -> [(Int, Int)]
-qList point delta sortedPointList = q
-    where
+        -- define candidate-zone
         (px, py) = point
-        min_qy = py - 2 * delta
-        qyList = [y | (x, y) <- sortedPointList]
-        min_qy_index = binSearchGtIndex min_qy qyList
-        q = take 6 (drop min_qy_index sortedPointList)
+        yMin = py - 2 * delta
+        yMax = py + 2 * delta
+        
+        -- create array
+        iMax = (length sortedPointList) - 1
+        sortedArray = listArray (0, iMax) sortedPointList
+
+        -- binary search algo
+        binarySearch :: Int -> Int -> Int -> Array Int (Int, Int) -> Int
+        binarySearch lo hi value sortedArray
+            | lo == hi = lo
+            | yMid >= value = binarySearch lo mid value sortedArray
+            | otherwise = binarySearch (mid+1) hi value sortedArray
+                where
+                    mid = (lo + hi) `div` 2
+                    (xMid, yMid) = sortedArray ! mid
+
+        -- lowest (in y) possible candidate
+        indexStart = binarySearch 0 iMax yMin sortedArray
+        
+        -- beware out-of-index error
+        indexStop = minimum [iMax, indexStart + 5]
+        
+        -- grab at most 6 candidates
+        r = [sortedArray!i | i <- [indexStart..indexStop]]
+        
+        -- filter out any bad candidates
+        result = filter (\(x, y) -> y <= yMax) r
 
 
 -- divide and conquer algo
-closestPair :: [(Int, Int)] -> Int
-closestPair list_X
-    | n == 2 = (dist2 (list_X !! 0) (list_X !! 1))
-    | n == 3 = minimum [(dist2 (list_X !! 0) (list_X !! 1)), (dist2 (list_X !! 1) (list_X !! 2)), (dist2 (list_X !! 2) (list_X !! 0))]
-    | otherwise = minimum [d, dz] 
+-- guide: https://www.cs.ubc.ca/~liorma/cpsc320/files/closest-points.pdf
+-- assumes incoming pointList is sorted by xCoord
+minDist :: [(Int, Int)] -> Int
+minDist pointList
+    | n == 2 = (distSquared (pointList !! 0) (pointList !! 1))
+    | n == 3 = minimum [(distSquared (pointList !! 0) (pointList !! 1)), (distSquared (pointList !! 1) (pointList !! 2)), (distSquared (pointList !! 2) (pointList !! 0))]
+    | otherwise = recursiveResult 
         where
             -- split list in half
-            n = length list_X
+            n = length pointList
             half = n `div` 2
-            l = take half list_X
-            r = drop half list_X
+            (l, r) = splitAt half pointList
             
             -- find minimum of each half
-            dl = closestPair l
-            dr = closestPair r
+            dl = minDist l
+            dr = minDist r
             d = minimum [dl, dr]
 
             -- points within range d of x_mid
-            (x_mid, y_mid) = head r
+            ( (x_mid, y_mid) : _ ) = r
             xLower = (fromIntegral x_mid) - d
             xUpper = (fromIntegral x_mid) + d
 
             -- there's potential to speed this up, stop collecting once bounds are found
-            lx = [x | (x, y) <- l]
-            blIndex = binSearchGtIndex xLower lx
-            bl = drop blIndex l
+            bl = [(x, y) | (x, y) <- l, xLower <= x]
             br = [(x, y) | (x, y) <- r, x <= xUpper]
-            brs = sortBy yCoord br
 
             -- check 6 remaining candidates    
-            candidates = [dist2 p q | p <- bl, q <- qList p d brs]
-            dz = if (length candidates) > 0 then (minimum candidates) else d
+            distSquaredCandidates = [(distSquared p q) | p <- bl, q <- (candidateList p d br)]
+            
+            -- compared zone candidates to d
+            recursiveResult 
+                | length distSquaredCandidates > 0 = minimum [d, dz]
+                | otherwise = d
+                    where
+                        dz = minimum distSquaredCandidates
 
--- test_case
-test_case = closestDist listZ
-    where
-        listZ = d 14
 
--- solve the problem
-answer = closestDist list_Z
+solve :: Int -> Double
+solve k = result
     where
-        list_Z = d 2000000
+        pointList = d k
+        pointListSortedByX = sortBy xCoord pointList
+        minDistSquared = minDist pointListSortedByX
+        result = sqrt (fromIntegral minDistSquared)
+
+
+-- solutions
+test_case = solve 14
+answer = solve 2_000_000
 
 
 ----

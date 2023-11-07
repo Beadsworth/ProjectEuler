@@ -1,0 +1,144 @@
+	Tue Nov  7 07:15 2023 Time and Allocation Profiling Report  (Final)
+
+	   p816 +RTS -p -RTS
+
+	total time  =       22.86 secs   (22861 ticks @ 1000 us, 1 processor)
+	total alloc = 48,270,783,944 bytes  (excludes profiling overheads)
+
+COST CENTRE                   MODULE SRC                      %time %alloc
+
+distSquared                   Main   p816.hs:(24,1)-(27,19)    16.9   21.4
+candidateList.binarySearch    Main   p816.hs:(56,9)-(62,52)    14.5   12.6
+minDist.distSquaredCandidates Main   p816.hs:106:13-94         11.6   15.1
+solve.pointListSortedByX      Main   p816.hs:120:9-52          10.1    6.1
+xCoord                        Main   p816.hs:32:1-40            7.8    0.0
+candidateList.sortedPointList Main   p816.hs:43:9-49            6.6   10.9
+candidateList.r               Main   p816.hs:71:9-58            5.7   13.1
+candidateList                 Main   p816.hs:(40,1)-(74,48)     3.8    2.2
+candidateList.result          Main   p816.hs:74:9-48            3.7    7.7
+minDist.(...)                 Main   p816.hs:89:13-43           3.1    5.0
+yCoord                        Main   p816.hs:33:1-40            3.1    0.0
+minDist.recursiveResult.dz    Main   p816.hs:113:25-58          1.9    0.0
+minDist.bl                    Main   p816.hs:102:13-52          1.9    1.4
+minDist.br                    Main   p816.hs:103:13-52          1.7    1.4
+candidateList.result.\        Main   p816.hs:74:37-45           1.5    0.0
+minDist.n                     Main   p816.hs:87:13-32           1.4    0.0
+minDist                       Main   p816.hs:(81,1)-(113,58)    1.2    0.4
+
+
+                                                                                                              individual      inherited
+COST CENTRE                                MODULE                SRC                       no.     entries  %time %alloc   %time %alloc
+
+MAIN                                       MAIN                  <built-in>                132           0    0.0    0.0   100.0  100.0
+ CAF                                       Main                  <entire-module>           263           0    0.0    0.0   100.0  100.0
+  answer                                   Main                  p816.hs:127:1-24          320           1    0.0    0.0    99.5   98.8
+   solve                                   Main                  p816.hs:(117,1)-(122,51)  321           1    0.0    0.0    99.5   98.8
+    solve.minDistSquared                   Main                  p816.hs:121:9-51          326           1    0.0    0.0    81.5   92.5
+     minDist                               Main                  p816.hs:(81,1)-(113,58)   327     1902847    1.2    0.4    81.5   92.5
+      minDist.n                            Main                  p816.hs:87:13-32          328     1902847    1.4    0.0     1.4    0.0
+      distSquared                          Main                  p816.hs:(24,1)-(27,19)    333     1145728    0.3    0.4     0.3    0.4
+       distSquared.a                       Main                  p816.hs:26:9-19           334     1145728    0.0    0.0     0.0    0.0
+       distSquared.b                       Main                  p816.hs:27:9-19           335     1145728    0.0    0.0     0.0    0.0
+      minDist.(...)                        Main                  p816.hs:97:13-38          341      951423    0.0    0.0     0.0    0.0
+      minDist.(...)                        Main                  p816.hs:89:13-43          330      951423    3.1    5.0     3.1    5.0
+      minDist.bl                           Main                  p816.hs:102:13-52         339      951423    1.9    1.4     1.9    1.4
+      minDist.br                           Main                  p816.hs:103:13-52         347      951423    1.7    1.4     1.7    1.4
+      minDist.d                            Main                  p816.hs:94:13-32          338      951423    0.0    0.0     0.0    0.0
+      minDist.distSquaredCandidates        Main                  p816.hs:106:13-94         343      951423   11.6   15.1    69.1   83.6
+       distSquared                         Main                  p816.hs:(24,1)-(27,19)    366    63321387   16.6   21.0    16.8   21.0
+        distSquared.a                      Main                  p816.hs:26:9-19           367    63321387    0.1    0.0     0.1    0.0
+        distSquared.b                      Main                  p816.hs:27:9-19           368    63321387    0.0    0.0     0.0    0.0
+       candidateList                       Main                  p816.hs:(40,1)-(74,48)    344    11844342    3.8    2.2    40.7   47.6
+        candidateList.(...)                Main                  p816.hs:46:9-24           357    11844342    0.0    0.0     0.0    0.0
+        candidateList.indexStart           Main                  p816.hs:65:9-57           345    11844342    0.5    0.0    15.3   12.6
+         candidateList.binarySearch        Main                  p816.hs:(56,9)-(62,52)    351    90382976   14.5   12.6    14.8   12.6
+          candidateList.binarySearch.(...) Main                  p816.hs:62:21-52          353    78538634    0.2    0.0     0.2    0.0
+          candidateList.binarySearch.mid   Main                  p816.hs:61:21-43          355    78538634    0.1    0.0     0.1    0.0
+          candidateList.binarySearch.yMid  Main                  p816.hs:62:21-52          352    78538634    0.0    0.0     0.0    0.0
+        candidateList.indexStop            Main                  p816.hs:68:9-50           359    11844342    0.0    0.0     0.0    0.0
+        candidateList.py                   Main                  p816.hs:46:9-24           358    11844342    0.0    0.0     0.0    0.0
+        candidateList.r                    Main                  p816.hs:71:9-58           360    11844342    5.7   13.1     5.7   13.1
+        candidateList.result               Main                  p816.hs:74:9-48           361    11844342    3.7    7.7     5.2    7.7
+         candidateList.result.\            Main                  p816.hs:74:37-45          362    65659731    1.5    0.0     1.5    0.0
+        candidateList.yMax                 Main                  p816.hs:48:9-29           363    11844342    0.3    0.4     0.3    0.4
+        candidateList.yMin                 Main                  p816.hs:47:9-29           356    11844342    0.1    0.4     0.1    0.4
+        candidateList.iMax                 Main                  p816.hs:51:9-43           346      951423    0.2    0.0     0.2    0.0
+        candidateList.sortedArray          Main                  p816.hs:52:9-57           354      951423    0.4    0.3     0.4    0.3
+        candidateList.sortedPointList      Main                  p816.hs:43:9-49           349      951423    6.6   10.9     9.6   10.9
+         yCoord                            Main                  p816.hs:33:1-40           350    69964396    3.1    0.0     3.1    0.0
+      minDist.dl                           Main                  p816.hs:92:13-26          332      951423    0.2    0.0     0.2    0.0
+      minDist.dr                           Main                  p816.hs:93:13-26          337      951423    0.1    0.0     0.1    0.0
+      minDist.half                         Main                  p816.hs:88:13-28          329      951423    0.0    0.0     0.0    0.0
+      minDist.l                            Main                  p816.hs:89:13-43          331      951423    0.0    0.0     0.0    0.0
+      minDist.r                            Main                  p816.hs:89:13-43          336      951423    0.0    0.0     0.0    0.0
+      minDist.recursiveResult              Main                  p816.hs:(109,13)-(113,58) 364      951423    0.6    0.1     2.5    0.2
+       minDist.recursiveResult.dz          Main                  p816.hs:113:25-58         365      951250    1.9    0.0     1.9    0.0
+      minDist.xLower                       Main                  p816.hs:98:13-45          340      951423    0.0    0.0     0.0    0.0
+      minDist.xUpper                       Main                  p816.hs:99:13-45          348      951423    0.0    0.0     0.0    0.0
+      minDist.x_mid                        Main                  p816.hs:97:13-38          342      951423    0.0    0.0     0.0    0.0
+    solve.pointList                        Main                  p816.hs:119:9-23          322           1    0.0    0.0     0.1    0.2
+     d                                     Main                  p816.hs:19:1-18           323           1    0.1    0.2     0.1    0.2
+    solve.pointListSortedByX               Main                  p816.hs:120:9-52          324           1   10.1    6.1    17.9    6.1
+     xCoord                                Main                  p816.hs:32:1-40           325    40480718    7.8    0.0     7.8    0.0
+    solve.result                           Main                  p816.hs:122:9-51          369           1    0.0    0.0     0.0    0.0
+  main                                     Main                  p816.hs:(131,1)-(139,20)  264           1    0.0    0.0     0.0    0.0
+  pList                                    Main                  p816.hs:16:1-54           270           1    0.2    0.3     0.4    1.2
+   pList.\                                 Main                  p816.hs:16:31-47          272     2000000    0.0    0.0     0.0    0.0
+   sList                                   Main                  p816.hs:13:1-51           271           1    0.2    0.7     0.3    0.9
+    sList.\                                Main                  p816.hs:13:24-43          275     3999999    0.1    0.1     0.1    0.1
+  test_case                                Main                  p816.hs:126:1-20          266           1    0.0    0.0     0.0    0.0
+   solve                                   Main                  p816.hs:(117,1)-(122,51)  267           1    0.0    0.0     0.0    0.0
+    solve.minDistSquared                   Main                  p816.hs:121:9-51          276           1    0.0    0.0     0.0    0.0
+     minDist                               Main                  p816.hs:(81,1)-(113,58)   277          11    0.0    0.0     0.0    0.0
+      minDist.n                            Main                  p816.hs:87:13-32          278          11    0.0    0.0     0.0    0.0
+      distSquared                          Main                  p816.hs:(24,1)-(27,19)    283          10    0.0    0.0     0.0    0.0
+       distSquared.a                       Main                  p816.hs:26:9-19           284          10    0.0    0.0     0.0    0.0
+       distSquared.b                       Main                  p816.hs:27:9-19           285          10    0.0    0.0     0.0    0.0
+      minDist.(...)                        Main                  p816.hs:97:13-38          291           5    0.0    0.0     0.0    0.0
+      minDist.(...)                        Main                  p816.hs:89:13-43          280           5    0.0    0.0     0.0    0.0
+      minDist.bl                           Main                  p816.hs:102:13-52         289           5    0.0    0.0     0.0    0.0
+      minDist.br                           Main                  p816.hs:103:13-52         297           5    0.0    0.0     0.0    0.0
+      minDist.d                            Main                  p816.hs:94:13-32          288           5    0.0    0.0     0.0    0.0
+      minDist.distSquaredCandidates        Main                  p816.hs:106:13-94         293           5    0.0    0.0     0.0    0.0
+       distSquared                         Main                  p816.hs:(24,1)-(27,19)    316          74    0.0    0.0     0.0    0.0
+        distSquared.a                      Main                  p816.hs:26:9-19           317          74    0.0    0.0     0.0    0.0
+        distSquared.b                      Main                  p816.hs:27:9-19           318          74    0.0    0.0     0.0    0.0
+       candidateList                       Main                  p816.hs:(40,1)-(74,48)    294          17    0.0    0.0     0.0    0.0
+        candidateList.(...)                Main                  p816.hs:46:9-24           307          17    0.0    0.0     0.0    0.0
+        candidateList.indexStart           Main                  p816.hs:65:9-57           295          17    0.0    0.0     0.0    0.0
+         candidateList.binarySearch        Main                  p816.hs:(56,9)-(62,52)    301          54    0.0    0.0     0.0    0.0
+          candidateList.binarySearch.(...) Main                  p816.hs:62:21-52          303          37    0.0    0.0     0.0    0.0
+          candidateList.binarySearch.mid   Main                  p816.hs:61:21-43          305          37    0.0    0.0     0.0    0.0
+          candidateList.binarySearch.yMid  Main                  p816.hs:62:21-52          302          37    0.0    0.0     0.0    0.0
+        candidateList.indexStop            Main                  p816.hs:68:9-50           309          17    0.0    0.0     0.0    0.0
+        candidateList.py                   Main                  p816.hs:46:9-24           308          17    0.0    0.0     0.0    0.0
+        candidateList.r                    Main                  p816.hs:71:9-58           310          17    0.0    0.0     0.0    0.0
+        candidateList.result               Main                  p816.hs:74:9-48           311          17    0.0    0.0     0.0    0.0
+         candidateList.result.\            Main                  p816.hs:74:37-45          312          74    0.0    0.0     0.0    0.0
+        candidateList.yMax                 Main                  p816.hs:48:9-29           313          17    0.0    0.0     0.0    0.0
+        candidateList.yMin                 Main                  p816.hs:47:9-29           306          17    0.0    0.0     0.0    0.0
+        candidateList.iMax                 Main                  p816.hs:51:9-43           296           5    0.0    0.0     0.0    0.0
+        candidateList.sortedArray          Main                  p816.hs:52:9-57           304           5    0.0    0.0     0.0    0.0
+        candidateList.sortedPointList      Main                  p816.hs:43:9-49           299           5    0.0    0.0     0.0    0.0
+         yCoord                            Main                  p816.hs:33:1-40           300          29    0.0    0.0     0.0    0.0
+      minDist.dl                           Main                  p816.hs:92:13-26          282           5    0.0    0.0     0.0    0.0
+      minDist.dr                           Main                  p816.hs:93:13-26          287           5    0.0    0.0     0.0    0.0
+      minDist.half                         Main                  p816.hs:88:13-28          279           5    0.0    0.0     0.0    0.0
+      minDist.l                            Main                  p816.hs:89:13-43          281           5    0.0    0.0     0.0    0.0
+      minDist.r                            Main                  p816.hs:89:13-43          286           5    0.0    0.0     0.0    0.0
+      minDist.recursiveResult              Main                  p816.hs:(109,13)-(113,58) 314           5    0.0    0.0     0.0    0.0
+       minDist.recursiveResult.dz          Main                  p816.hs:113:25-58         315           5    0.0    0.0     0.0    0.0
+      minDist.xLower                       Main                  p816.hs:98:13-45          290           5    0.0    0.0     0.0    0.0
+      minDist.xUpper                       Main                  p816.hs:99:13-45          298           5    0.0    0.0     0.0    0.0
+      minDist.x_mid                        Main                  p816.hs:97:13-38          292           5    0.0    0.0     0.0    0.0
+    solve.pointList                        Main                  p816.hs:119:9-23          268           1    0.0    0.0     0.0    0.0
+     d                                     Main                  p816.hs:19:1-18           269           1    0.0    0.0     0.0    0.0
+    solve.pointListSortedByX               Main                  p816.hs:120:9-52          273           1    0.0    0.0     0.0    0.0
+     xCoord                                Main                  p816.hs:32:1-40           274          37    0.0    0.0     0.0    0.0
+    solve.result                           Main                  p816.hs:122:9-51          319           1    0.0    0.0     0.0    0.0
+ CAF                                       GHC.Conc.Signal       <entire-module>           257           0    0.0    0.0     0.0    0.0
+ CAF                                       GHC.Float             <entire-module>           251           0    0.0    0.0     0.0    0.0
+ CAF                                       GHC.IO.Encoding       <entire-module>           246           0    0.0    0.0     0.0    0.0
+ CAF                                       GHC.IO.Encoding.Iconv <entire-module>           244           0    0.0    0.0     0.0    0.0
+ CAF                                       GHC.IO.Handle.FD      <entire-module>           236           0    0.0    0.0     0.0    0.0
+ main                                      Main                  p816.hs:(131,1)-(139,20)  265           0    0.0    0.0     0.0    0.0
