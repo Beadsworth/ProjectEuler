@@ -131,3 +131,11 @@ dmypy.json
 .pyre/
 
 **/.idea
+
+# ProjectEuler
+
+## Haskell
+haskell/**/*.o
+haskell/**/*.hi
+haskell/**/*.prof
+haskell/**/soln
